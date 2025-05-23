@@ -28,20 +28,20 @@ export default async function handler(req, res) {
   const YANDEX_FOLDER_ID = process.env.YANDEX_FOLDER_ID;
 
   try {
-    const response = await fetch("https://translate.api.cloud.yandex.net/translate/v2/translate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Api-Key ${YANDEX_API_KEY}`
-      },
-      body: JSON.stringify({
-        folderId: YANDEX_FOLDER_ID,
-        texts,
-        sourceLanguageCode: "ru",
-        targetLanguageCode: lang,
-        format: "PLAIN_TEXT"
-      })
-    });
+      const response = await fetch("https://translate.api.cloud.yandex.net/translate/v2/translate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Api-Key ${YANDEX_API_KEY}`
+        },
+        body: JSON.stringify({
+          folderId: YANDEX_FOLDER_ID,
+          texts,
+          targetLanguageCode: lang, // 👈 автоопределение исходного
+          format: "PLAIN_TEXT"
+        })
+      });
+
 
     const data = await response.json();
 
